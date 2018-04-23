@@ -11,7 +11,7 @@ public class Bank {
 
     public Bank(int n, double initialBalance) {
         accounts = new Account[n];
-        for (int i = 0; i < n; i ++) {
+        for (int i = 0; i < n; i++) {
             Account account = new Account();
             account.setAccountId(i + 1);
             account.setBalance(initialBalance);
@@ -20,7 +20,10 @@ public class Bank {
     }
 
     public void transfer(Account from, Account to, double amount) {
-
+        if (from.getBalance() < amount) {
+            return;
+        }
+        from.setBalance(from.getBalance() - amount);
     }
 
 }
