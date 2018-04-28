@@ -1,7 +1,7 @@
 package personal.nathan.base.Sync;
 
 /**
- * Description: java 核心技术 660
+ * Description:
  * <p>
  * Created by zhangwei on 2018/4/23.
  */
@@ -19,11 +19,33 @@ public class Bank {
         }
     }
 
-    public void transfer(Account from, Account to, double amount) {
-        if (from.getBalance() < amount) {
+    /**
+     * 转账
+     *
+     * @param from
+     * @param to
+     * @param amount
+     */
+    public void transfer(int from, int to, double amount) {
+        Account accountFrom = accounts[from];
+        Account accountTo = accounts[to];
+        if (amount <= 0
+                || accountFrom.getBalance() < amount) {
             return;
         }
-        from.setBalance(from.getBalance() - amount);
+        accountFrom.setBalance(accountFrom.getBalance() - amount);
+        accountTo.setBalance(accountTo.getBalance() + amount);
     }
 
+    public double getTotalBalance() {
+        double sum = 0;
+        for (Account account: accounts) {
+            sum += account.getBalance();
+        }
+        return sum;
+    }
+
+    public int size() {
+        return accounts.length;
+    }
 }

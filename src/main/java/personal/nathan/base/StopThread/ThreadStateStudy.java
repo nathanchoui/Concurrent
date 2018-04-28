@@ -1,4 +1,4 @@
-package personal.nathan.base;
+package personal.nathan.base.StopThread;
 
 import java.util.concurrent.TimeUnit;
 
