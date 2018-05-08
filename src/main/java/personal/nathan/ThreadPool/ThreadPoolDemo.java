@@ -22,7 +22,7 @@ public class ThreadPoolDemo {
          */
         ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
         /**
-         *初始化一部分线程放入线程池，不够时再创建。
+         *初始化0，动态创建，创建后60秒不被使用则回收。
          */
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
         /**
