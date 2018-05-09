@@ -1,4 +1,4 @@
-package personal.nathan.base;
+package personal.nathan.base.semaphore;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
