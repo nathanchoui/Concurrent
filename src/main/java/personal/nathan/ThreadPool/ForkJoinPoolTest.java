@@ -2,6 +2,9 @@ package personal.nathan.ThreadPool;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveAction;
 import java.util.concurrent.RecursiveTask;
 
@@ -10,7 +13,7 @@ import java.util.concurrent.RecursiveTask;
  *
  * Created by zhangwei on 2018/5/10.
  */
-public class ForkJoinPool {
+public class ForkJoinPoolTest {
 
     // 带返回值
     public static class CountTask extends RecursiveTask<Long> {
@@ -32,6 +35,7 @@ public class ForkJoinPool {
             boolean canCompute = (end - start) < THRESHOLD;
 
             if (canCompute) {
+                System.out.println("canCompute");
                 for (long i = start; i < end; i ++) {
                     sum += i;
                 }
@@ -46,15 +50,17 @@ public class ForkJoinPool {
                     subTasks.add(subTask);
                     subTask.fork();
                 }
+                for (CountTask ct: subTasks) {
+                    sum += ct.join();
+                }
             }
 
-            return null;
+            return sum;
         }
     }
 
     // 不带返回值
     public static class VoidTask extends RecursiveAction {
-
         @Override
         protected void compute() {
 
@@ -63,7 +69,18 @@ public class ForkJoinPool {
 
 
     public static void main(String[] args) {
-
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        CountTask countTask = new CountTask(0, 100000L);
+        ForkJoinTask<Long> result = forkJoinPool.submit(countTask);
+        try {
+            long res = result.get();
+            System.out.println(res);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
+
 
 }
