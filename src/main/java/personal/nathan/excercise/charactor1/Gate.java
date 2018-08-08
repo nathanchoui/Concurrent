@@ -13,7 +13,7 @@ public class Gate {
     public String toString() {
         return "No." + counter + ": " + name + ", " + address;
     }
-    private void check() {
+    private synchronized void check() {
         if (name.charAt(0) != address.charAt(0)) {
             System.out.println("***** BROKEN ***** " + toString());
         }
