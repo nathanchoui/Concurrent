@@ -10,8 +10,7 @@ public class OrderEventFactory implements EventFactory<OrderEvent> {
 
     @Override
     public OrderEvent newInstance() {
-        OrderEvent orderEvent = new OrderEvent();
-        orderEvent.setValue("test order event");
-        return orderEvent;
+//        System.out.println("return new OrderEvent instance");
+        return new OrderEvent();
     }
 }

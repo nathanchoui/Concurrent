@@ -2,10 +2,12 @@ package personal.nathan.disruptor.quickstart;
 
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.EventFactory;
+import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.WaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
 
+import java.util.UUID;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -40,7 +42,25 @@ public class DisruptorMain {
             }
         };
         WaitStrategy waitStrategy = new BlockingWaitStrategy();
-        Disruptor<OrderEvent> disruptor = new Disruptor<OrderEvent>(orderEventFactory, ringBufferSize, threadFactory, ProducerType.SINGLE, waitStrategy);
+        Disruptor<OrderEvent> disruptor = new Disruptor<OrderEvent>(orderEventFactory
+                , ringBufferSize, threadFactory, ProducerType.SINGLE, waitStrategy);
+
+        // 添加消费者
+        disruptor.handleEventsWith(new OrderEventHandler());
+
+        // 启动
+        disruptor.start();
+
+        // 获取数据容器，ringBuffer
+        RingBuffer<OrderEvent> ringBuffer = disruptor.getRingBuffer();
+
+        OrderEventProducer producer = new OrderEventProducer(ringBuffer);
+
+        for (int i = 0; i < 10; i ++) {
+            producer.sendData(UUID.randomUUID().toString());
+        }
+        disruptor.shutdown();
+
 
     }
 
