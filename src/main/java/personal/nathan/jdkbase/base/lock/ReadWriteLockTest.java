@@ -55,8 +55,8 @@ public class ReadWriteLockTest {
             @Override
             public void run() {
                 try {
-                    test.write(writeLock, new Random().nextInt(100));
-                    //test.write(lock, new Random().nextInt(100));
+//                    test.write(writeLock, new Random().nextInt(100));
+                    test.write(lock, new Random().nextInt(100));
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();
@@ -68,8 +68,8 @@ public class ReadWriteLockTest {
             @Override
             public void run() {
                 try {
-                    test.read(readLock);
-                    //test.read(lock);
+//                    test.read(readLock);
+                    test.read(lock);
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();

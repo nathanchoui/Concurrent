@@ -34,7 +34,7 @@ public class ConditionTest {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(new Cond());
         t.start();
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(5);
         lock.lock();
         condition.signal();
         lock.unlock();
