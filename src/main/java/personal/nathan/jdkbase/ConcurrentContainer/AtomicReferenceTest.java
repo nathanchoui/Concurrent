@@ -1,7 +1,5 @@
 package personal.nathan.jdkbase.ConcurrentContainer;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-import org.omg.PortableServer.THREAD_POLICY_ID;
 
 import java.lang.ref.Reference;
 import java.util.Random;

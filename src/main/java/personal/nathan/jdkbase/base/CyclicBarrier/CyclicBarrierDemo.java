@@ -10,7 +10,8 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * Created by nathan.z on 2018/5/6.
  */
-public class CyclicBarrierDemo {
+public class
+CyclicBarrierDemo {
 
     /**
      * 一定得有十个线程调用await()方法后，
@@ -21,9 +22,9 @@ public class CyclicBarrierDemo {
      */
     private static final CyclicBarrier cb = new CyclicBarrier(10);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 10; i ++) {
-            new Thread(() -> {
+            Thread t = new Thread(() -> {
                 try {
                     // 模拟处理耗时
                     TimeUnit.SECONDS.sleep(new Random().nextInt(3) + 1);
@@ -36,7 +37,8 @@ public class CyclicBarrierDemo {
                 catch (BrokenBarrierException e) {
                     e.printStackTrace();
                 }
-            }).start();
+            });
+            t.start();
         }
         System.out.println("done!");
     }

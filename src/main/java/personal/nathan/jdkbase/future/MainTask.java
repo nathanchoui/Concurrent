@@ -36,9 +36,9 @@ public class MainTask {
             mainRes = task1.get();
             res2 = null;
             res3 = null;
-            if (mainRes != null) {
+            if (mainRes == null) {
                 try {
-                    res2 = task2.get(5, TimeUnit.MILLISECONDS);
+                    res2 = task2.get(10, TimeUnit.MILLISECONDS);
                 }
                 catch (TimeoutException te) {
                     te.printStackTrace();

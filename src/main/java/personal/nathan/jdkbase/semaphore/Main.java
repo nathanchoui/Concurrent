@@ -12,7 +12,7 @@ public class Main {
         BoundedResource resource = new BoundedResource(3);
 
         // 10个线程使用资源
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             new UserThread(resource).start();
         }
     }

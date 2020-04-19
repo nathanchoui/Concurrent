@@ -51,12 +51,13 @@ public class CyclicBarrierCalc {
             try {
                 cb.await();
             }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             catch (BrokenBarrierException e) {
                 e.printStackTrace();
             }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Description:
+ * 线程工作完成latch.countDown();
+ * latch.await();等待全部线程完成。
  * <p>
  * Created by nathan.z on 2018/5/5.
  */
